@@ -1,1 +1,0 @@
-Deeplearning is an algorithm in which incredibly high generalization is achieved, by preparing a large amount of data points and a large model, then running SGD.
