@@ -1,5 +1,3 @@
-# Sensho Nobe
-
 <img src="assets/profile.jpeg" alt="profile" width=150/>
 <a href="https://github.com/SeanNobel"><img src="assets/github.png" alt="profile" width=40/></a>
 <a href="https://x.com/nobel_sean"><img src="assets/x.png" alt="profile" width=40/></a>
@@ -9,6 +7,7 @@
 
 - **Araya**
   - Senior Engineer & Researcher (present)
+  - Currently a leading developer for two projects related to traffic safety, one involving Free Energy Principle and the other using Edge AI and AR technology.
 
 - **The University of Tokyo**
   - MSc. in Neurobiology (2021)
@@ -20,13 +19,14 @@
 ## Languages
 
 - **Proficient**: Python, C#, Japanese
-- **Conversant**: Java, Blueprint, C++, English (TOEIC 900pt)
+- **Conversant**: Java, Blueprint, English (TOEIC 900pt)
+- **Familiar**: C++, MATLAB, Bash, HTML/CSS, JavaScript
 
 
-## Areas of Interest & Expertise
+## Areas of Expertise & Interest
 
-- **Machine Learning**: Active Inference, Model-Based Reinforcement Learning, Contrastive Learning, Energy-Based Models, Predictive Coding, Score-Based Generative Models, LLMs
-- **Neuroscience**: Brain-Computer Interface, EEG/MEG, Optogenetics
+- **Machine Learning**: Active Inference, Model-Based Reinforcement Learning, Energy-Based Models, Predictive Coding, Contrastive Learning, Score-Based Generative Models, LLMs
+- **Neuroscience**: Brain-Computer Interface, EEG/MEG, Optogenetics, Spiking Neural Networks
 - **Game & App Development**: Unreal Engine, Unity, Android
 
 
@@ -34,9 +34,9 @@
 
 1. Nobe, Sensho, and Shuntaro Sasai. 2025. "Latent Brain Denoiser: Image Decoding through Schrödinger Bridge." under review.
 
-1. Fujisawa, Ippei, Sensho Nobe, Hiroki Seto, Rina Onda, Yoshiaki Uchida, Hiroki Ikoma, Pei-Chun Chien, and Ryota Kanai. 2024. “ProcBench: Benchmark for Multi-Step Reasoning and Following Procedure.” arXiv [Cs.AI]. arXiv. http://arxiv.org/abs/2410.03117.
+1. Fujisawa, Ippei, Sensho Nobe, Hiroki Seto, Rina Onda, Yoshiaki Uchida, Hiroki Ikoma, Pei-Chun Chien, and Ryota Kanai. 2024. “ProcBench: Benchmark for Multi-Step Reasoning and Following Procedure.” arXiv [Cs.AI]. arXiv. [http://arxiv.org/abs/2410.03117](http://arxiv.org/abs/2410.03117).
 
-1. Sato, Motoshige, Yasuo Kabe, Sensho Nobe, Akito Yoshida, Masakazu Inoue, Mayumi Shimizu, Kenichi Tomeoka, and Shuntaro Sasai. 2024. “Delineating Neural Contributions to Electroencephalogram-Based Speech Decoding.” bioRxiv. https://doi.org/10.1101/2024.05.09.591996.
+1. Sato, Motoshige, Yasuo Kabe, Sensho Nobe, Akito Yoshida, Masakazu Inoue, Mayumi Shimizu, Kenichi Tomeoka, and Shuntaro Sasai. 2024. “Delineating Neural Contributions to Electroencephalogram-Based Speech Decoding.” bioRxiv. [https://doi.org/10.1101/2024.05.09.591996](https://doi.org/10.1101/2024.05.09.591996).
 
 
 ## Teaching (online lectures)
@@ -47,7 +47,7 @@
 - [Deep Generative Models - Applied Deep Learning Course](https://weblab.t.u-tokyo.ac.jp/lecture/course-list/deep-generative-model/) @ Univ. of Tokyo [2022 - 2024]
   - Python coding lecturer - VAE, [GAN](https://arxiv.org/abs/1406.2661), [DDPM](https://arxiv.org/abs/2006.11239)
 
-- [Deep Learning Basics](https://weblab.t.u-tokyo.ac.jp/deep-learning/) @ Univ. of Tokyo [2022 - 2025]
+- [Deep Learning Basic Course](https://weblab.t.u-tokyo.ac.jp/deep-learning/) @ Univ. of Tokyo [2022 - 2025]
   - Python coding lecturer - PyTorch basics, RNNs, Fine-Tuning LLMs with [QLoRA](https://arxiv.org/abs/2305.14314), VAE
 
 - [Neuromatch Academy: Computational Neuroscience](https://compneuro.neuromatch.io/tutorials/intro.html) [2022]
