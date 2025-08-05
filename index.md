@@ -11,6 +11,7 @@
 
 - **The University of Tokyo**
   - MSc. in Neurobiology (2021)
+  - Did research on memory consolidation using optogenetics and AI-automated behavior analyses on mice.
 
 - **Kyoto University**
   - BSc. in Biophysics (2019)
