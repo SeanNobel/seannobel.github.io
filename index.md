@@ -1,4 +1,4 @@
-<div style="display: flex; align-items: flex-end; gap: 8px;">
+<div style="display: flex; align-items: flex-end; gap: 8px; margin-bottom: 24px;">
   <img src="assets/profile.jpeg" alt="profile" width=150/>
   <a href="https://github.com/SeanNobel"><img src="assets/github.png" alt="github" width=40/></a>
   <a href="https://x.com/nobel_sean"><img src="assets/x.png" alt="x" width=40/></a>
