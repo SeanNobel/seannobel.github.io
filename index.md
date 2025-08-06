@@ -7,7 +7,7 @@
 
 - **Araya**
   - Senior Engineer & Researcher (present)
-  - Currently a leading developer for two projects related to traffic safety, one involving Free Energy Principle and the other using Edge AI and AR technology.
+  - Currently a leading developer for two projects related to traffic safety, one involving Free Energy Principle and the other using Edge AI and Augmented Reality.
 
 - **The University of Tokyo**
   - MSc. in Neurobiology (2021)
@@ -28,12 +28,12 @@
 
 - **Machine Learning**: Active Inference, Model-Based Reinforcement Learning, Energy-Based Models, Predictive Coding, Contrastive Learning, Score-Based Generative Models, LLMs
 - **Neuroscience**: Brain-Computer Interface, EEG/MEG, Optogenetics, Spiking Neural Networks
-- **Game & App Development**: Unreal Engine, Unity, Android
+- **Game & App Development**: Unreal Engine, Unity, Android, AR
 
 
 ## Publications
 
-1. Nobe, Sensho, and Shuntaro Sasai. 2025. "Latent Brain Denoiser: Image Decoding through Schrödinger Bridge." under review.
+1. Nobe, Sensho, and Shuntaro Sasai. 2025. "Direct Generation of Images from EEG Signals via Schrödinger Bridge." TBU.
 
 1. Fujisawa, Ippei, Sensho Nobe, Hiroki Seto, Rina Onda, Yoshiaki Uchida, Hiroki Ikoma, Pei-Chun Chien, and Ryota Kanai. 2024. “ProcBench: Benchmark for Multi-Step Reasoning and Following Procedure.” arXiv [Cs.AI]. arXiv. [http://arxiv.org/abs/2410.03117](http://arxiv.org/abs/2410.03117).
 
