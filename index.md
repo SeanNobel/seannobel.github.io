@@ -42,13 +42,13 @@
 
 ## Teaching (online lectures)
 
-- [World Models - Applied Deep Learning Course](https://weblab.t.u-tokyo.ac.jp/lecture/course-list/world-model/) @ Univ. of Tokyo [2021 - 2025]
+- [World Models - Applied Deep Learning Course](https://weblab.t.u-tokyo.ac.jp/lecture/course-list/world-model/) @ Matsuo Lab, Univ. of Tokyo [2021 - 2025]
   - Python coding lecturer - [VAE](https://arxiv.org/abs/1312.6114), [VQ-VAE](https://arxiv.org/abs/1711.00937), [PPO](https://arxiv.org/abs/1707.06347), [Model-Ensemble TRPO](https://arxiv.org/abs/1802.10592), [Video MONet](https://arxiv.org/abs/2006.07034), [Trajectory Transformer](https://arxiv.org/abs/2106.02039)
 
-- [Deep Generative Models - Applied Deep Learning Course](https://weblab.t.u-tokyo.ac.jp/lecture/course-list/deep-generative-model/) @ Univ. of Tokyo [2022 - 2024]
+- [Deep Generative Models - Applied Deep Learning Course](https://weblab.t.u-tokyo.ac.jp/lecture/course-list/deep-generative-model/) @ Matsuo Lab, Univ. of Tokyo [2022 - 2024]
   - Python coding lecturer - VAE, [GAN](https://arxiv.org/abs/1406.2661), [DDPM](https://arxiv.org/abs/2006.11239)
 
-- [Deep Learning Basic Course](https://weblab.t.u-tokyo.ac.jp/deep-learning/) @ Univ. of Tokyo [2022 - 2025]
+- [Deep Learning Basic Course](https://weblab.t.u-tokyo.ac.jp/deep-learning/) @ Matsuo Lab, Univ. of Tokyo [2022 - 2025]
   - Python coding lecturer - PyTorch basics, RNNs, Fine-Tuning LLMs with [QLoRA](https://arxiv.org/abs/2305.14314), VAE
 
 - [Neuromatch Academy: Computational Neuroscience](https://compneuro.neuromatch.io/tutorials/intro.html) [2022]
@@ -56,5 +56,7 @@
 
 
 ## Other
+
+- 「[特集：好奇心に好奇心](https://www.nikkei-science.com/page/magazine/202506.html)」日経サイエンス 2025年6月号
 
 - 「[NeuroAIのイロハ：自由エネルギー原理](https://note.com/arayashiki_/n/nd5e9f473df63)」アラヤシキ │ アラヤ公式note
