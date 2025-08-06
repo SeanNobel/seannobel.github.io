@@ -57,6 +57,6 @@
 
 ## Other
 
-- 「[特集：好奇心に好奇心](https://www.nikkei-science.com/page/magazine/202506.html)」日経サイエンス 2025年6月号
+- 「[特集：好奇心に好奇心](https://www.nikkei-science.com/page/magazine/202506.html)」　日経サイエンス 2025年6月号
 
-- 「[NeuroAIのイロハ：自由エネルギー原理](https://note.com/arayashiki_/n/nd5e9f473df63)」アラヤシキ │ アラヤ公式note
+- 「[NeuroAIのイロハ：自由エネルギー原理](https://note.com/arayashiki_/n/nd5e9f473df63)」　アラヤシキ │ アラヤ公式note
