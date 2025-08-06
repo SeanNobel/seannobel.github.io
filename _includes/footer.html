@@ -1,0 +1,47 @@
+<footer class="site-footer h-card">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        {%- if site.author %}
+          <ul class="contact-list">
+            {% if site.author.name -%}
+              <li class="p-name">{{ site.author.name | escape }}</li>
+            {% endif -%}
+            {% if site.author.email -%}
+              <li><a class="u-email" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
+            {%- endif %}
+          </ul>
+        {%- endif %}
+      </div>
+      <div class="footer-col">
+        <p>{{ site.description | escape }}</p>
+      </div>
+    </div>
+
+    <div class="social-links">
+      {%- include social.html -%}
+    </div>
+
+  </div>
+
+</footer>
+
+<script>
+  // すべてのリンクを取得する
+  const links = document.querySelectorAll('a');
+  // 現在のサイトのホスト名を取得する
+  const siteHost = window.location.hostname;
+
+  links.forEach(link => {
+    // リンクにhref属性があり、かつホスト名が現在のサイトと異なる場合（外部リンクの場合）
+    if (link.href && link.hostname !== siteHost) {
+      // 新しいタブで開くように設定する
+      link.setAttribute('target', '_blank');
+      // セキュリティ対策としてrel属性も追加する
+      link.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
+</script>
