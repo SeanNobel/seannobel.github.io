@@ -56,7 +56,7 @@
 - [深層学習 - Deep Learning 基礎講座](https://weblab.t.u-tokyo.ac.jp/deep-learning/) @ 松尾・岩澤研究室 [2022 - 2025]
   - 演習講師・教材作成 - PyTorch基礎, RNN, [QLoRA](https://arxiv.org/abs/2305.14314)によるLLMのfine-tuning, VAE
 
-- [Neuromatch Academy: 計算論的神経科学](https://compneuro.neuromatch.io/tutorials/intro.html) [2022]
+- [Neuromatch Academy: Computational Neuroscience](https://compneuro.neuromatch.io/tutorials/intro.html) [2022]
   - Regular TA
 
 
