@@ -1,6 +1,6 @@
-<div style="text-align: right;">
+<!-- <div style="text-align: right;">
 <a href="./index.html">English</a> / <a href="./index-ja.html">Japanese</a>
-</div>
+</div> -->
 
 <img src="assets/profile.jpeg" alt="profile" width=150/>
 <a href="https://github.com/SeanNobel"><img src="assets/github.png" alt="profile" width=40/></a>

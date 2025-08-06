@@ -1,6 +1,6 @@
-<div style="text-align: right;">
+<!-- <div style="text-align: right;">
 <a href="./index.html">English</a> / <a href="./index-ja.html">Japanese</a>
-</div>
+</div> -->
 
 <img src="assets/profile.jpeg" alt="profile" width=150/>
 <a href="https://github.com/SeanNobel"><img src="assets/github.png" alt="profile" width=40/></a>
@@ -14,11 +14,11 @@
   - 2025年現在，交通安全に関連する2つのプロジェクトで主要開発者として従事．
     1. 自由エネルギー原理と世界モデルの技術を応用し，運転者の視線・運転行動をモデリングする．実装にはPyTorchを使用．
     1. 拡張現実（AR）とエッジAIを用い，周囲の情報を検知して交通参加者に有用な情報を提供するシステム．開発にはC# (Unity)とJava (Android)を使用．
-  - 過去には，自己教師あり学習による大規模脳波モデルや，Unreal Engineを用いた運転シミュレータなど，様々な開発に従事．
+  - 過去には，自己教師あり学習による大規模脳波モデルや，Unreal Engineを用いた運転シミュレータなど様々な開発に従事．
 
 - **東京大学 理学系研究科**
   - 修士（神経生物学，2021年）
-  - マウスにおける光遺伝学とAIによる自動行動解析を用い，記憶固定に関する研究を実施．
+  - マウスにおける光遺伝学とAI自動化した行動解析を用い，記憶固定に関する研究を実施．
 
 - **京都大学**
   - 学士（生物物理学，2019年）
@@ -27,14 +27,14 @@
 ## Languages
 
 - **Proficient**: Python, C#, 日本語
-- **Conversant**: Java, Blueprint, 英語 (TOEIC 900点)
+- **Conversant**: Java, Blueprint, 英語（TOEIC 900点）
 - **Familiar**: C++, MATLAB, Bash, HTML/CSS, JavaScript
 
 
 ## Areas of Expertise & Interest
 
-- **機械学習**：能動的推論，モデルベース強化学習，エネルギーベースモデル，予測符号化，対照学習，スコアベース生成モデル，大規模言語モデル (LLM)
-- **神経科学**：ブレイン・コンピュータ・インタフェース，EEG/MEG，光遺伝学，スパイキングニューラルネットワーク
+- **機械学習**：能動的推論，モデルベース強化学習，エネルギーベースモデル，予測符号化，対照学習，スコアベース生成モデル，大規模言語モデル
+- **神経科学**：非侵襲脳コンピュータインタフェース，EEG/MEG，光遺伝学，スパイキングニューラルネットワーク
 - **ゲーム・アプリ開発**：Unreal Engine, Unity, Android, AR
 
 
