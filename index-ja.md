@@ -47,13 +47,13 @@
 
 ## Teaching (online lectures)
 
-- [世界モデル - Deep Learning 応用講座](https://weblab.t.u-tokyo.ac.jp/lecture/course-list/world-model/) @ 松尾研究室・東京大学 [2021 - 2025]
+- [世界モデル - Deep Learning 応用講座](https://weblab.t.u-tokyo.ac.jp/lecture/course-list/world-model/) @ 松尾・岩澤研究室 [2021 - 2025]
   - 演習講師・教材作成 - [VAE](https://arxiv.org/abs/1312.6114), [VQ-VAE](https://arxiv.org/abs/1711.00937), [PPO](https://arxiv.org/abs/1707.06347), [Model-Ensemble TRPO](https://arxiv.org/abs/1802.10592), [Video MONet](https://arxiv.org/abs/2006.07034), [Trajectory Transformer](https://arxiv.org/abs/2106.02039)
 
-- [深層生成モデル - Deep Learning 応用講座](https://weblab.t.u-tokyo.ac.jp/lecture/course-list/deep-generative-model/) @ 松尾研究室・東京大学 [2022 - 2024]
+- [深層生成モデル - Deep Learning 応用講座](https://weblab.t.u-tokyo.ac.jp/lecture/course-list/deep-generative-model/) @ 松尾・岩澤研究室 [2022 - 2024]
   - 演習講師・教材作成 - VAE, [GAN](https://arxiv.org/abs/1406.2661), [DDPM](https://arxiv.org/abs/2006.11239)
 
-- [深層学習 - Deep Learning 基礎講座](https://weblab.t.u-tokyo.ac.jp/deep-learning/) @ 松尾研究室・東京大学 [2022 - 2025]
+- [深層学習 - Deep Learning 基礎講座](https://weblab.t.u-tokyo.ac.jp/deep-learning/) @ 松尾・岩澤研究室 [2022 - 2025]
   - 演習講師・教材作成 - PyTorch基礎, RNN, [QLoRA](https://arxiv.org/abs/2305.14314)によるLLMのfine-tuning, VAE
 
 - [Neuromatch Academy: 計算論的神経科学](https://compneuro.neuromatch.io/tutorials/intro.html) [2022]
