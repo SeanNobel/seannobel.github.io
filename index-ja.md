@@ -38,7 +38,7 @@
 
 ## Publications
 
-1. Nobe, Sensho, and Shuntaro Sasai. 2025. "Direct Generation of Images from EEG Signals via Schrödinger Bridge." TBU.
+1. Nobe, Sensho, and Shuntaro Sasai. 2025. “Direct Generation of Images from EEG Using Schrödinger Bridge.” bioRxiv. [https://doi.org/10.1101/2025.08.18.670451](https://doi.org/10.1101/2025.08.18.670451).
 
 1. Fujisawa, Ippei, Sensho Nobe, Hiroki Seto, Rina Onda, Yoshiaki Uchida, Hiroki Ikoma, Pei-Chun Chien, and Ryota Kanai. 2024. “ProcBench: Benchmark for Multi-Step Reasoning and Following Procedure.” arXiv [Cs.AI]. arXiv. [http://arxiv.org/abs/2410.03117](http://arxiv.org/abs/2410.03117).
 
