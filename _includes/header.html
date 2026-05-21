@@ -1,18 +1,40 @@
 <header class="site-header">
   <div class="wrapper">
-    {%- assign default_paths = site.pages | map: "path" -%}
-    {%- assign page_paths = site.header_pages | default: default_paths -%}
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    {%- assign current_lang = page.lang | default: "en" -%}
+    {%- assign nav_pages = site.pages | where: "lang", current_lang -%}
+    {%- if current_lang == "ja" -%}
+      {%- assign home_url = "/index-ja.html" -%}
+    {%- else -%}
+      {%- assign home_url = "/" -%}
+    {%- endif -%}
+    <a class="site-title" rel="author" href="{{ home_url | relative_url }}">{{ site.title | escape }}</a>
 
-    <div class="lang-switcher" style="float: right; line-height: 56px;">
-      {%- if page.url == "/index-ja.html" -%}
-        <a href="{{ "/" | relative_url }}">English</a> / 日本語
+    <div class="lang-switcher" style="float: right; line-height: 56px; margin-left: 2em;">
+      {%- if current_lang == "ja" -%}
+        {%- assign other_lang = "en" -%}
+        {%- assign fallback_pair = "/" -%}
       {%- else -%}
-        English / <a href="{{ "/index-ja.html" | relative_url }}">日本語</a>
+        {%- assign other_lang = "ja" -%}
+        {%- assign fallback_pair = "/index-ja.html" -%}
+      {%- endif -%}
+
+      {%- assign pair = page.lang_pair_url -%}
+      {%- if pair == nil and page.slug_id -%}
+        {%- assign pair_candidates = site.posts | where: "slug_id", page.slug_id | where: "lang", other_lang -%}
+        {%- if pair_candidates.size > 0 -%}
+          {%- assign pair = pair_candidates[0].url -%}
+        {%- endif -%}
+      {%- endif -%}
+      {%- assign pair = pair | default: fallback_pair -%}
+
+      {%- if current_lang == "ja" -%}
+        <a href="{{ pair | relative_url }}">English</a> / 日本語
+      {%- else -%}
+        English / <a href="{{ pair | relative_url }}">日本語</a>
       {%- endif -%}
     </div>
 
-    {%- if page_paths -%}
+    {%- if nav_pages -%}
       <nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
@@ -24,10 +46,9 @@
         </label>
 
         <div class="trigger">
-          {%- for path in page_paths -%}
-            {%- assign my_page = site.pages | where: "path", path | first -%}
-            {%- if my_page.title -%}
-            <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+          {%- for nav_page in nav_pages -%}
+            {%- if nav_page.title -%}
+            <a class="page-link" href="{{ nav_page.url | relative_url }}">{{ nav_page.title | escape }}</a>
             {%- endif -%}
           {%- endfor -%}
         </div>
