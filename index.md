@@ -1,4 +1,5 @@
 ---
+layout: default
 lang: en
 lang_pair_url: /index-ja.html
 ---

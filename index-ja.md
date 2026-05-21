@@ -1,4 +1,5 @@
 ---
+layout: default
 lang: ja
 lang_pair_url: /
 ---
