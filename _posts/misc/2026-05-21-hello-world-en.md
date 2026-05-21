@@ -4,6 +4,7 @@ title: "Hello World"
 date: 2026-05-21
 lang: en
 slug_id: hello-world
+categories: [misc]
 permalink: /blog/hello-world/
 ---
 

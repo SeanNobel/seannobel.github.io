@@ -4,6 +4,7 @@ title: "はじめての投稿"
 date: 2026-05-21
 lang: ja
 slug_id: hello-world
+categories: [misc]
 permalink: /blog-ja/hello-world/
 ---
 

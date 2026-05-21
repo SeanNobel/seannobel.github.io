@@ -4,7 +4,8 @@ title: "Gaussian Embeddings: How JEPAs Secretly Learn Your Data"
 date: 2026-05-21
 lang: en
 slug_id: gaussian-embeddings-how-jepas-secretly-learn-your-data
-permalink: /blog-en/gaussian-embeddings-how-jepas-secretly-learn-your-data/
+categories: [JEPA]
+permalink: /blog/gaussian-embeddings-how-jepas-secretly-learn-your-data/
 ---
 
 ### TL;DR

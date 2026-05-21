@@ -145,7 +145,7 @@ def rewrite_images(md_text: str, export_root: Path, slug: str) -> str:
     return IMAGE_RE.sub(_replace, md_text)
 
 
-def render_front_matter(title: str, date: dt.date, slug: str) -> str:
+def render_front_matter(title: str, date: dt.date, slug: str, category: str) -> str:
     title_escaped = title.replace('"', '\\"')
     return (
         "---\n"
@@ -154,6 +154,7 @@ def render_front_matter(title: str, date: dt.date, slug: str) -> str:
         f"date: {date.isoformat()}\n"
         "lang: ja\n"
         f"slug_id: {slug}\n"
+        f"categories: [{category}]\n"
         f"permalink: /blog-ja/{slug}/\n"
         "---\n\n"
     )
@@ -216,7 +217,7 @@ def main() -> None:
     ja_path = category_dir / f"{post_date.isoformat()}-{slug}.md"
     if ja_path.exists():
         print(f"Warning: overwriting existing post: {ja_path.relative_to(REPO_ROOT)}", file=sys.stderr)
-    ja_path.write_text(render_front_matter(title, post_date, slug) + body, encoding="utf-8")
+    ja_path.write_text(render_front_matter(title, post_date, slug, category) + body, encoding="utf-8")
     print(f"Wrote {ja_path.relative_to(REPO_ROOT)}  (category: {category})")
     if (ASSETS_BLOG_DIR / slug).exists():
         print(f"Copied images to {(ASSETS_BLOG_DIR / slug).relative_to(REPO_ROOT)}/")
