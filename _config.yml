@@ -1,5 +1,8 @@
 theme: minima
 excerpt_separator: <!--more-->
 
+kramdown:
+  math_engine: null
+
 exclude:
   - "_posts/**/*.zip"
