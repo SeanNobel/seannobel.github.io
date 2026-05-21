@@ -4,7 +4,7 @@
     {%- assign nav_pages = site.pages | where: "lang", current_lang -%}
     <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
 
-    <div class="lang-switcher" style="float: right; line-height: 56px;">
+    <div class="lang-switcher" style="float: right; line-height: 56px; margin-left: 2em;">
       {%- if current_lang == "ja" -%}
         {%- assign pair = page.lang_pair_url | default: "/" -%}
         <a href="{{ pair | relative_url }}">English</a> / 日本語

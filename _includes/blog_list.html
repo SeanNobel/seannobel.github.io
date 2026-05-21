@@ -17,16 +17,7 @@ Shared blog index renderer. Pass `lang` (e.g. {% include blog_list.html lang="ja
 {%- endif -%}
 
 {%- assign lang_posts = site.posts | where: "lang", include.lang -%}
-
-{%- assign cat_names = "" | split: "" -%}
-{%- for p in lang_posts -%}
-  {%- for c in p.categories -%}
-    {%- unless cat_names contains c -%}
-      {%- assign cat_names = cat_names | push: c -%}
-    {%- endunless -%}
-  {%- endfor -%}
-{%- endfor -%}
-{%- assign cat_names = cat_names | sort -%}
+{%- assign sorted_categories = site.categories | sort -%}
 
 <style>
 .blog-layout { display: flex; gap: 3em; align-items: flex-start; flex-wrap: wrap-reverse; }
@@ -76,10 +67,13 @@ Shared blog index renderer. Pass `lang` (e.g. {% include blog_list.html lang="ja
     <h3>{{ label_categories }}</h3>
     <ul>
       <li><a href="#all" class="cat-link" data-filter="all">{{ label_all }} ({{ lang_posts.size }})</a></li>
-      {% for cat in cat_names %}
-        {%- assign count = lang_posts | where_exp: "p", "p.categories contains cat" | size -%}
-        <li><a href="#{{ cat }}" class="cat-link" data-filter="{{ cat }}">{{ cat }} ({{ count }})</a></li>
-      {% endfor %}
+      {%- for cat_entry in sorted_categories -%}
+        {%- assign cat_name = cat_entry[0] -%}
+        {%- assign cat_posts = cat_entry[1] | where: "lang", include.lang -%}
+        {%- if cat_posts.size > 0 -%}
+          <li><a href="#{{ cat_name }}" class="cat-link" data-filter="{{ cat_name }}">{{ cat_name }} ({{ cat_posts.size }})</a></li>
+        {%- endif -%}
+      {%- endfor -%}
     </ul>
   </aside>
 </div>
