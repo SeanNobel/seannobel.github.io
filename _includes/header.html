@@ -6,10 +6,25 @@
 
     <div class="lang-switcher" style="float: right; line-height: 56px; margin-left: 2em;">
       {%- if current_lang == "ja" -%}
-        {%- assign pair = page.lang_pair_url | default: "/" -%}
+        {%- assign other_lang = "en" -%}
+        {%- assign fallback_pair = "/" -%}
+      {%- else -%}
+        {%- assign other_lang = "ja" -%}
+        {%- assign fallback_pair = "/index-ja.html" -%}
+      {%- endif -%}
+
+      {%- assign pair = page.lang_pair_url -%}
+      {%- if pair == nil and page.slug_id -%}
+        {%- assign pair_candidates = site.posts | where: "slug_id", page.slug_id | where: "lang", other_lang -%}
+        {%- if pair_candidates.size > 0 -%}
+          {%- assign pair = pair_candidates[0].url -%}
+        {%- endif -%}
+      {%- endif -%}
+      {%- assign pair = pair | default: fallback_pair -%}
+
+      {%- if current_lang == "ja" -%}
         <a href="{{ pair | relative_url }}">English</a> / 日本語
       {%- else -%}
-        {%- assign pair = page.lang_pair_url | default: "/index-ja.html" -%}
         English / <a href="{{ pair | relative_url }}">日本語</a>
       {%- endif -%}
     </div>
