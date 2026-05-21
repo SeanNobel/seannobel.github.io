@@ -10,11 +10,16 @@ Usage:
   - or an already-unzipped folder
 
 Output:
-  - _posts/YYYY-MM-DD-<slug>-ja.md  (Japanese post, front-matter ready)
-  - assets/blog/<slug>/...           (images referenced in the post)
+  - _posts/<category>/YYYY-MM-DD-<slug>.md  (Japanese post — the default; English
+    translations live alongside as `<slug>-en.md` and are added later.)
+  - assets/blog/<slug>/...                   (images referenced in the post)
+
+`<category>` is the post's category (defaults to "misc"). Categories are
+derived from the post's parent folder by Jekyll, so the folder name doubles as
+the category name. Use the `--category` flag to override.
 
 The English translation step is intentionally not handled here; it will be
-added later as a `--translate` flag that produces the matching `-en.md`.
+added later as a `--translate` flag that produces the matching `<slug>-en.md`.
 """
 
 from __future__ import annotations
@@ -139,6 +144,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("path", type=Path, help="Path to a Notion export zip or unzipped folder.")
     parser.add_argument("--date", type=str, default=None, help="Override post date (YYYY-MM-DD). Defaults to today.")
     parser.add_argument("--slug", type=str, default=None, help="Override the auto-generated slug.")
+    parser.add_argument("--category", type=str, default="misc", help="Category folder under _posts/ (defaults to misc).")
     return parser.parse_args()
 
 
@@ -172,11 +178,13 @@ def main() -> None:
     body = strip_title_line(md_text)
     body = rewrite_images(body, export_root, slug)
 
-    POSTS_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = POSTS_DIR / f"{post_date.isoformat()}-{slug}-ja.md"
+    category = slugify(args.category)
+    category_dir = POSTS_DIR / category
+    category_dir.mkdir(parents=True, exist_ok=True)
+    out_path = category_dir / f"{post_date.isoformat()}-{slug}.md"
 
     if out_path.exists():
-        print(f"Warning: overwriting existing post: {out_path.name}", file=sys.stderr)
+        print(f"Warning: overwriting existing post: {out_path.relative_to(REPO_ROOT)}", file=sys.stderr)
 
     out_path.write_text(render_front_matter(title, post_date, slug) + body, encoding="utf-8")
 
@@ -185,7 +193,7 @@ def main() -> None:
         print(f"Copied images to {(ASSETS_BLOG_DIR / slug).relative_to(REPO_ROOT)}/")
 
     # TODO: --translate flag. When implemented, generate
-    # _posts/YYYY-MM-DD-<slug>-en.md sharing the same slug_id, with
+    # _posts/<category>/YYYY-MM-DD-<slug>-en.md sharing the same slug_id, with
     # permalink /blog/<slug>/ and translated title/body.
 
     if tmpdir_obj is not None:

@@ -1,0 +1,105 @@
+{%- comment -%}
+Shared blog index renderer. Pass `lang` (e.g. {% include blog_list.html lang="ja" %}).
+{%- endcomment -%}
+
+{%- if include.lang == "ja" -%}
+  {%- assign label_categories = "カテゴリ" -%}
+  {%- assign label_all = "すべて" -%}
+  {%- assign label_more = "[続きを読む]" -%}
+  {%- assign label_empty = "まだ記事がありません。" -%}
+  {%- assign date_fmt = "%Y年%-m月%-d日" -%}
+{%- else -%}
+  {%- assign label_categories = "Categories" -%}
+  {%- assign label_all = "All" -%}
+  {%- assign label_more = "[Read More]" -%}
+  {%- assign label_empty = "No posts yet." -%}
+  {%- assign date_fmt = "%B %-d, %Y" -%}
+{%- endif -%}
+
+{%- assign lang_posts = site.posts | where: "lang", include.lang -%}
+
+{%- assign cat_names = "" | split: "" -%}
+{%- for p in lang_posts -%}
+  {%- for c in p.categories -%}
+    {%- unless cat_names contains c -%}
+      {%- assign cat_names = cat_names | push: c -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign cat_names = cat_names | sort -%}
+
+<style>
+.blog-layout { display: flex; gap: 3em; align-items: flex-start; flex-wrap: wrap-reverse; }
+.blog-posts { flex: 1 1 480px; min-width: 0; }
+.blog-sidebar { flex: 0 0 160px; position: sticky; top: 1em; }
+.blog-sidebar h3 { font-weight: 700; margin-top: 0; }
+.blog-sidebar ul { list-style: none; padding-left: 0; margin: 0; }
+.blog-sidebar li { margin: 0.3em 0; }
+.cat-link { text-decoration: none; color: #555; }
+.cat-link:hover { color: #000; }
+.cat-link.active { font-weight: 700; color: #000; }
+.post-entry { border-bottom: 1px solid #eee; padding: 2em 0; }
+.post-entry h2 { font-weight: 800; margin-bottom: 0.2em; }
+.post-entry h2 a { color: inherit; text-decoration: none; }
+.post-entry .post-meta { color: #999; font-style: italic; margin-top: 0; }
+.post-entry .post-excerpt { color: #333; }
+@media (max-width: 700px) {
+  .blog-sidebar { position: static; flex: 1 1 auto; }
+}
+</style>
+
+<div class="blog-layout">
+  <main class="blog-posts">
+    {% for post in lang_posts %}
+      <article class="post-entry" data-category-tags="{{ post.categories | join: ',' }}">
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
+        <p class="post-meta">
+          {%- if include.lang == "ja" -%}
+            {{ post.date | date: date_fmt }} 投稿
+          {%- else -%}
+            Posted on {{ post.date | date: date_fmt }}
+          {%- endif -%}
+        </p>
+        <div class="post-excerpt">
+          {{ post.excerpt | strip_html | strip | truncate: 280 }}
+          <strong><a href="{{ post.url | relative_url }}">{{ label_more }}</a></strong>
+        </div>
+      </article>
+    {% endfor %}
+
+    {% if lang_posts.size == 0 %}
+      <p style="text-align:center; color:#999; margin:4em 0;">{{ label_empty }}</p>
+    {% endif %}
+  </main>
+
+  <aside class="blog-sidebar">
+    <h3>{{ label_categories }}</h3>
+    <ul>
+      <li><a href="#all" class="cat-link" data-filter="all">{{ label_all }} ({{ lang_posts.size }})</a></li>
+      {% for cat in cat_names %}
+        {%- assign count = lang_posts | where_exp: "p", "p.categories contains cat" | size -%}
+        <li><a href="#{{ cat }}" class="cat-link" data-filter="{{ cat }}">{{ cat }} ({{ count }})</a></li>
+      {% endfor %}
+    </ul>
+  </aside>
+</div>
+
+<script>
+(function () {
+  function applyFilter(filter) {
+    document.querySelectorAll('.post-entry').forEach(function (el) {
+      var tags = (el.dataset.categoryTags || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+      el.style.display = (filter === 'all' || tags.indexOf(filter) >= 0) ? '' : 'none';
+    });
+    document.querySelectorAll('.cat-link').forEach(function (el) {
+      el.classList.toggle('active', el.dataset.filter === filter);
+    });
+  }
+  function fromHash() {
+    var hash = (location.hash || '#all').slice(1);
+    applyFilter(hash || 'all');
+  }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+})();
+</script>
