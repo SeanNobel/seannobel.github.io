@@ -2,31 +2,26 @@
 """Convert a Notion Markdown export to a Jekyll post.
 
 Usage:
-    python scripts/notion_to_jekyll.py <path-to-notion-export>
-    python scripts/notion_to_jekyll.py <path-to-notion-export> --date 2026-05-21 --slug my-post
+    python scripts/notion_to_jekyll.py _posts/<category>/<notion-export>.zip
 
-`<path-to-notion-export>` can be either:
-  - the .zip downloaded from Notion ("Export" -> "Markdown & CSV")
-  - or an already-unzipped folder
+The input path must live under `_posts/<category>/` — the parent folder name
+becomes the post's category. Output goes into the same folder:
 
-Output:
-  - _posts/<category>/YYYY-MM-DD-<slug>.md  (Japanese post — the default; English
-    translations live alongside as `<slug>-en.md` and are added later.)
-  - assets/blog/<slug>/...                   (images referenced in the post)
+    _posts/<category>/<YYYY-MM-DD>-<slug>.md      (Japanese — the source of truth)
 
-`<category>` is the post's category (defaults to "misc"). Categories are
-derived from the post's parent folder by Jekyll, so the folder name doubles as
-the category name. Use the `--category` flag to override.
+Images referenced in the post are copied to `assets/blog/<slug>/` and their
+paths are rewritten to absolute site paths.
 
-The English translation step is intentionally not handled here; it will be
-added later as a `--translate` flag that produces the matching `<slug>-en.md`.
+For the English version, paste the generated Japanese markdown into Claude
+Desktop, translate it manually, and save the result alongside as
+`<YYYY-MM-DD>-<slug>-en.md` with `lang: en` and `permalink: /blog/<slug>/`
+in the front matter.
 """
 
 from __future__ import annotations
 
 import argparse
 import datetime as dt
-import os
 import re
 import shutil
 import sys
@@ -54,24 +49,49 @@ def slugify(text: str) -> str:
     return text or "post"
 
 
+def _is_junk(path: Path) -> bool:
+    """Filter out macOS resource fork files and __MACOSX folders."""
+    return "__MACOSX" in path.parts or path.name.startswith("._")
+
+
+def extract_all_zips(root: Path) -> None:
+    """Recursively extract any zip files under `root` in place.
+
+    Notion's "ExportBlock" downloads wrap the actual markdown export inside a
+    nested `*-Part-N.zip`, so we need to keep unpacking until no zips remain.
+    """
+    while True:
+        nested_zips = [
+            z for z in root.rglob("*.zip")
+            if z.is_file() and not _is_junk(z)
+        ]
+        if not nested_zips:
+            return
+        for z in nested_zips:
+            dest = z.with_suffix("")
+            dest.mkdir(parents=True, exist_ok=True)
+            with zipfile.ZipFile(z) as zf:
+                zf.extractall(dest)
+            z.unlink()
+
+
 def find_export_root(path: Path) -> Path:
-    """Return the directory containing the top-level .md file of the export."""
+    """Return the directory containing the shallowest Notion .md file."""
     if path.is_file() and path.suffix.lower() == ".md":
         return path.parent
 
-    candidates = sorted(p for p in path.glob("*.md") if p.is_file())
-    if candidates:
-        return path
-
-    subdirs = [p for p in path.iterdir() if p.is_dir()]
-    if len(subdirs) == 1:
-        return find_export_root(subdirs[0])
-
-    raise SystemExit(f"Could not find a Notion .md file inside {path}")
+    candidates = [
+        p for p in path.rglob("*.md")
+        if p.is_file() and not _is_junk(p)
+    ]
+    if not candidates:
+        raise SystemExit(f"Could not find a Notion .md file inside {path}")
+    candidates.sort(key=lambda p: (len(p.parts), p.name))
+    return candidates[0].parent
 
 
 def find_post_md(export_root: Path) -> Path:
-    mds = sorted(p for p in export_root.glob("*.md") if p.is_file())
+    mds = sorted(p for p in export_root.glob("*.md") if p.is_file() and not _is_junk(p))
     if not mds:
         raise SystemExit(f"No .md file found in {export_root}")
     if len(mds) > 1:
@@ -139,12 +159,24 @@ def render_front_matter(title: str, date: dt.date, slug: str) -> str:
     )
 
 
+def derive_category(input_path: Path) -> tuple[str, Path]:
+    """Return (category_name, category_dir) given an input path under _posts/<category>/."""
+    resolved = input_path.resolve()
+    category_dir = resolved.parent
+    posts_resolved = POSTS_DIR.resolve()
+    if category_dir.parent != posts_resolved:
+        raise SystemExit(
+            f"Input must live under _posts/<category>/. Got: {input_path}\n"
+            f"Place the Notion export under _posts/<category>/ first."
+        )
+    return category_dir.name, category_dir
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Convert a Notion Markdown export to a Jekyll post.")
-    parser.add_argument("path", type=Path, help="Path to a Notion export zip or unzipped folder.")
+    parser.add_argument("path", type=Path, help="Path to a Notion export zip or unzipped folder, located under _posts/<category>/.")
     parser.add_argument("--date", type=str, default=None, help="Override post date (YYYY-MM-DD). Defaults to today.")
     parser.add_argument("--slug", type=str, default=None, help="Override the auto-generated slug.")
-    parser.add_argument("--category", type=str, default="misc", help="Category folder under _posts/ (defaults to misc).")
     return parser.parse_args()
 
 
@@ -154,11 +186,14 @@ def main() -> None:
     if not args.path.exists():
         raise SystemExit(f"Path does not exist: {args.path}")
 
+    category, category_dir = derive_category(args.path)
+
     tmpdir_obj: tempfile.TemporaryDirectory | None = None
     if args.path.is_file() and args.path.suffix.lower() == ".zip":
         tmpdir_obj = tempfile.TemporaryDirectory(prefix="notion-export-")
         with zipfile.ZipFile(args.path) as zf:
             zf.extractall(tmpdir_obj.name)
+        extract_all_zips(Path(tmpdir_obj.name))
         export_root = find_export_root(Path(tmpdir_obj.name))
     else:
         export_root = find_export_root(args.path)
@@ -178,23 +213,13 @@ def main() -> None:
     body = strip_title_line(md_text)
     body = rewrite_images(body, export_root, slug)
 
-    category = slugify(args.category)
-    category_dir = POSTS_DIR / category
-    category_dir.mkdir(parents=True, exist_ok=True)
-    out_path = category_dir / f"{post_date.isoformat()}-{slug}.md"
-
-    if out_path.exists():
-        print(f"Warning: overwriting existing post: {out_path.relative_to(REPO_ROOT)}", file=sys.stderr)
-
-    out_path.write_text(render_front_matter(title, post_date, slug) + body, encoding="utf-8")
-
-    print(f"Wrote {out_path.relative_to(REPO_ROOT)}")
+    ja_path = category_dir / f"{post_date.isoformat()}-{slug}.md"
+    if ja_path.exists():
+        print(f"Warning: overwriting existing post: {ja_path.relative_to(REPO_ROOT)}", file=sys.stderr)
+    ja_path.write_text(render_front_matter(title, post_date, slug) + body, encoding="utf-8")
+    print(f"Wrote {ja_path.relative_to(REPO_ROOT)}  (category: {category})")
     if (ASSETS_BLOG_DIR / slug).exists():
         print(f"Copied images to {(ASSETS_BLOG_DIR / slug).relative_to(REPO_ROOT)}/")
-
-    # TODO: --translate flag. When implemented, generate
-    # _posts/<category>/YYYY-MM-DD-<slug>-en.md sharing the same slug_id, with
-    # permalink /blog/<slug>/ and translated title/body.
 
     if tmpdir_obj is not None:
         tmpdir_obj.cleanup()
