@@ -1,6 +1,6 @@
 ---
 layout: default
-title: ブログ
+title: Blog
 lang: ja
 lang_pair_url: /blog/
 permalink: /blog-ja/
